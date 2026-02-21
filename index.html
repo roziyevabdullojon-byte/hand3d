@@ -17,12 +17,15 @@
 
     /* ✅ 2-usul: kamera ekranga CHIQMAYDI (butunlay yashirin), lekin tracking ishlaydi */
     video{
-      position: fixed;
-      left: -9999px; top: -9999px;
-      width: 1px; height: 1px;
-      opacity: 0;
-      pointer-events: none;
-    }
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform: scaleX(-1);
+  opacity: 0;           /* 👈 ko‘rinmaydi, lekin ishlaydi */
+  pointer-events:none;
+}
 
     canvas { position:absolute; inset:0; display:block; }
 
