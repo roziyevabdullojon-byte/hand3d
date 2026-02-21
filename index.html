@@ -125,16 +125,20 @@
     }
 
     function dragCube(n){
-      ndc.set(n.x, n.y);
-      raycaster.setFromCamera(ndc, camera3d);
-      const hit = new THREE.Vector3();
-      raycaster.ray.intersectPlane(plane, hit);
-      if (hit) {
-        cube.position.x = hit.x;
-        cube.position.z = hit.z;
-        cube.position.y = 0.35;
-      }
-    }
+  // x,z ni yer tekisligida yuritamiz
+  ndc.set(n.x, n.y);
+  raycaster.setFromCamera(ndc, camera3d);
+  const hit = new THREE.Vector3();
+  raycaster.ray.intersectPlane(plane, hit);
+  if (hit) {
+    cube.position.x = hit.x;
+    cube.position.z = hit.z;
+  }
+
+  // y (balandlik) — barmoq ekranda qanchalik yuqorida bo‘lsa, shuncha baland bo‘ladi
+  const yUp = THREE.MathUtils.clamp((1 - (n.y + 1) / 2) * 1.6, 0.05, 1.6);
+  cube.position.y = yUp;
+}
 
     // ----- MEDIAPIPE HANDS -----
     const hands = new Hands({
